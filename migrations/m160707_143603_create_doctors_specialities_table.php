@@ -7,14 +7,30 @@ use yii\db\Migration;
  */
 class m160707_143603_create_doctors_specialities_table extends Migration
 {
+	
+	private $_tableName = 'doctors_specialities';
+	
     /**
      * @inheritdoc
      */
     public function up()
     {
-        $this->createTable('doctors_specialities', [
+        $this->createTable($this->_tableName, [
             'id' => $this->primaryKey(),
         	'name' => $this->string(1024)->notNull(),
+        ]);
+        
+        $this->batchInsert($this->_tableName, ['name'], [
+        		['Кардиолог'],
+        		['Гастроэнтеролог'],
+        		['Невролог'],
+        		['Хирург'],
+        		['Офтальмолог'],
+        		['ЛОР-врач'],
+        		['Инфекционист'],
+        		['Травматолог'],
+        		['Терапевт'],
+        		['Эндокринолог'],        		
         ]);
     }
 
@@ -23,6 +39,6 @@ class m160707_143603_create_doctors_specialities_table extends Migration
      */
     public function down()
     {
-        $this->dropTable('doctors_specialities');
+        $this->dropTable($this->_tableName);
     }
 }

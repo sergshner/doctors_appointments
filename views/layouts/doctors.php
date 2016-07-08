@@ -71,8 +71,6 @@ $this->registerJs($script, yii\web\View::POS_READY);
     ]);
     NavBar::end();    
     ?>
-    
-
 
     <div class="container">
     	<div class="row">
@@ -83,28 +81,8 @@ $this->registerJs($script, yii\web\View::POS_READY);
         
         <div class="col-md-3" id="leftCol">
         	<?= $this->params['sidebar'] ?>
-        	<?php 
-        	/*
-        	echo Menu::widget([
-        			'items' => [
-        					['label' => 'Главная', 'url' => Url::to(['site/index', 'id' => 100])],
-        					['label' => 'О компании', 'url' => ['site/index', 'id' => 101]],
-        					['label' => 'Услуги', 'url' => ['site/index', 'id' => 102]],
-        					['label' => 'Контакты', 'url' => ['site/index', 'id' => 103]],
-        			],
-        			'options' => [
-        					'id'=>'sidebar',
-        					'class' => 'nav nav-stacked',
-        			],
-        			'activeCssClass'=>'active',
-        			'firstItemCssClass'=>'fist',
-        			'lastItemCssClass' =>'last',
-        	]);
-        	*/
-        	?>
-
 	    </div><!--/left-->
-      <?php $pjax = Pjax::begin(['linkSelector' => '#sidebar a']); ?>
+      <?php $pjax = Pjax::begin(['linkSelector' => '#sidebar a', 'scrollTo' => 1]); ?>
       	<!--right-->
         <div class="col-md-9">        
         	<?= $content ?>

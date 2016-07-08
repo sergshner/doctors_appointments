@@ -9,6 +9,8 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 
+use app\models\DoctorsSpecialities;
+
 class SiteController extends Controller
 {
     /**
@@ -60,8 +62,11 @@ class SiteController extends Controller
      */
     public function actionIndex($id = null)
     {
+    	$doctorsSpecialities = DoctorsSpecialities::find()->all();
+    	
     	$this->layout = 'doctors';
-    	$this->view->params['sidebar'] = $this->renderPartial('menu.php');
+    	$this->view->params['sidebar'] = $this->renderPartial('menu.php', ['doctorsSpecialities' => $doctorsSpecialities]);
+    	
         return $this->render('index', ['id' => $id]);
     }
 

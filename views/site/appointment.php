@@ -18,14 +18,17 @@ $this->title = \Yii::t ( 'app', 'Doctors appointments' ) . ' ' . $doctor->name;
 	    <div>
 	    <?php		
 				$events = array ();
-				// Testing
+				
+				
 				$Event = new \yii2fullcalendar\models\Event ();
 				$Event->id = 1;
 				$Event->title = 'Testing';
-				$Event->start = date ( 'Y-m-d\TH:i:s\Z' );
+				$Event->start = date ( 'Y-m-d\TH:00:00\Z' );
+				$Event->end = date ( 'Y-m-d\TH:00:00\Z', strtotime('+1 hour') );
+				$Event->allDay = false;
 				$Event->editable = true;
 				$events [] = $Event;
-				
+				/*
 				$Event = new \yii2fullcalendar\models\Event ();
 				$Event->id = 2;
 				$Event->title = 'Testing';
@@ -33,7 +36,7 @@ $this->title = \Yii::t ( 'app', 'Doctors appointments' ) . ' ' . $doctor->name;
 				$Event->editable = true;
 				$Event->durationEditable = true;
 				$events [] = $Event;
-				
+				*/
 				echo \yii2fullcalendar\yii2fullcalendar::widget ( [ 
 						'options' => [ 
 								'lang' => 'ru' 

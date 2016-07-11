@@ -7,7 +7,6 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use yii\widgets\Menu;
 use app\assets\AppAsset;
 use kartik\affix\Affix;
 use yii\helpers\Url;
@@ -82,7 +81,7 @@ $this->registerJs($script, yii\web\View::POS_READY);
         <div class="col-md-3" id="leftCol">
         	<?= $this->params['sidebar'] ?>
 	    </div><!--/left-->
-      <?php $pjax = Pjax::begin(['linkSelector' => '#sidebar a', 'scrollTo' => 1]); ?>
+      <?php $pjax = Pjax::begin(['linkSelector' => '#sidebar a, .pjax-link', 'scrollTo' => 1]); ?>
       	<!--right-->
         <div class="col-md-9">        
         	<?= $content ?>

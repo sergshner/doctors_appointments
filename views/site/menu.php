@@ -2,13 +2,13 @@
 use yii\widgets\Menu;
 use yii\helpers\Url;
 
+$menuItems = [];
+foreach ($doctorsSpecialities as $speciality) {
+	$menuItems[] = ['label' => $speciality->name, 'url' => Url::to(['site/index', 'id' => $speciality->id])];
+}
+
 echo Menu::widget([
-		'items' => [
-				['label' => 'Главная', 'url' => Url::to(['site/index', 'id' => 100])],
-				['label' => 'О компании', 'url' => ['site/index', 'id' => 101]],
-				['label' => 'Услуги', 'url' => ['site/index', 'id' => 102]],
-				['label' => 'Контакты', 'url' => ['site/index', 'id' => 103]],
-		],
+		'items' => $menuItems,
 		'options' => [
 				'id'=>'sidebar',
 				'class' => 'nav nav-stacked',

@@ -10,6 +10,8 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 
 use app\models\DoctorsSpecialities;
+use app\models\Doctors;
+use yii\helpers\Url;
 
 class SiteController extends Controller
 {
@@ -64,10 +66,36 @@ class SiteController extends Controller
     {
     	$doctorsSpecialities = DoctorsSpecialities::find()->all();
     	
+    	$condition = [];
+    	if (isset($id))
+    		$condition = ['speciality_id' => $id];
+    	$doctors = Doctors::find()->where($condition)->orderBy('id')->all();
+    	
+    	
     	$this->layout = 'doctors';
     	$this->view->params['sidebar'] = $this->renderPartial('menu.php', ['doctorsSpecialities' => $doctorsSpecialities]);
     	
-        return $this->render('index', ['id' => $id]);
+    	Url::remember();
+    	
+        return $this->render('index', ['id' => $id, 'doctors' => $doctors]);
+    }
+    
+    /**
+     * Appointment action.
+     * 
+     * @return string
+     */
+    public function actionAppointment($doctor_id)
+    {
+    	if (!Yii::$app->request->isPjax) {
+    		$doctorsSpecialities = DoctorsSpecialities::find()->all();
+    		$this->view->params['sidebar'] = $this->renderPartial('menu.php', ['doctorsSpecialities' => $doctorsSpecialities]);
+    	}  	
+    	
+    	$doctor = Doctors::findOne($doctor_id);
+    	
+    	$this->layout = 'doctors';
+    	return $this->render('appointment', ['doctor' => $doctor]);
     }
 
     /**

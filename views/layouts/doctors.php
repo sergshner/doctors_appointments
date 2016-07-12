@@ -22,7 +22,9 @@ $script = <<< JS
                 top: 0
             }
         });
-		
+		$.ajaxSetup ({
+			cache: true
+		});	
 		
     });
 JS;

@@ -24,3 +24,5 @@ Yii2 фреймворк. Использование AJAX позволяет из
 что значительно повышает отзывчивость сайта, уменьшает трафик между клиентом и сервером, снижает нагрузку на сервер. Сохранение данных
 о записях к врачу также реализовано при помощи технологии AJAX.
 
+![alt text](https://github.com/sergshner/doctors_appointments/blob/master/docs/doctors_ui1.png "UI1")
+![alt text](https://github.com/sergshner/doctors_appointments/blob/master/docs/doctors_ui2.png "UI2")

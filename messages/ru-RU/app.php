@@ -14,4 +14,5 @@ return [
 		'Appointment on this datetime is not possible' => 'Запись на данное время невозможна',
 		'FIO' => 'ФИО',
 		'Loading doctor appointments' => 'Идёт загрузка расписания доктора...',
+		'No doctors in the category' => 'В данной категории ещё нет врачей.'
 ];

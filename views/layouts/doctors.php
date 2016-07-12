@@ -22,7 +22,16 @@ $script = <<< JS
                 top: 0
             }
         });
+		
+		
     });
+
+    $(document).on('pjax:success', function() {
+    // Your code goes here ...
+	console.log('PJAAAX');
+		console.log($('#fCalendar'));;
+		$('#fCalendar').fullCalendar( 'render' );
+	});
 JS;
 $this->registerJs($script, yii\web\View::POS_READY);
 ?>
@@ -81,7 +90,7 @@ $this->registerJs($script, yii\web\View::POS_READY);
         <div class="col-md-3" id="leftCol">
         	<?= $this->params['sidebar'] ?>
 	    </div><!--/left-->
-      <?php $pjax = Pjax::begin(['linkSelector' => '#sidebar a, .pjax-link', 'scrollTo' => 1]); ?>
+      <?php $pjax = Pjax::begin(['id' => 'test', 'linkSelector' => '#sidebar a, .pjax-link', 'scrollTo' => 1]); ?>
       	<!--right-->
         <div class="col-md-9">        
         	<?= $content ?>

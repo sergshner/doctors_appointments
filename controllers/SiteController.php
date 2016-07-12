@@ -12,6 +12,8 @@ use app\models\ContactForm;
 use app\models\DoctorsSpecialities;
 use app\models\Doctors;
 use yii\helpers\Url;
+use yii\helpers\Json;
+use app\models\Appointments;
 
 class SiteController extends Controller
 {
@@ -87,15 +89,37 @@ class SiteController extends Controller
      */
     public function actionAppointment($doctor_id)
     {
+    	$doctor = Doctors::findOne($doctor_id);
+    	$appointments = Appointments::findAll(['doctor_id' => $doctor_id]);
+    	 
+    	$this->layout = 'doctors';
+    	
     	if (!Yii::$app->request->isPjax) {
     		$doctorsSpecialities = DoctorsSpecialities::find()->all();
     		$this->view->params['sidebar'] = $this->renderPartial('menu.php', ['doctorsSpecialities' => $doctorsSpecialities]);
-    	}  	
+    		return $this->render('appointment', ['doctor' => $doctor, 'appointments' => $appointments]);
+    	} else {
     	
-    	$doctor = Doctors::findOne($doctor_id);
-    	
-    	$this->layout = 'doctors';
-    	return $this->render('appointment', ['doctor' => $doctor]);
+
+    		return $this->renderAjax('appointment', ['doctor' => $doctor, 'appointments' => $appointments]);
+    	}
+    }
+    
+    /**
+     * AppointmentSave action.
+     *
+     * @return string
+     */
+    public function actionAppointmentsave()
+    {
+    	$data = Yii::$app->request->post();
+    	$appointment = new Appointments();
+    	if ($appointment->load($data, 'event'))	 {
+    		$appointment->save();
+			return 1;
+    	} else {
+    		return 0;
+    	}
     }
 
     /**

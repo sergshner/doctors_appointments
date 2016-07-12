@@ -17,52 +17,58 @@ $this->title = \Yii::t ( 'app', 'Doctors appointments' ) . ' ' . $doctor->name;
 		?>
 	    <div>
 	    <?php		
-				$events = array ();
-				
-				
+			$events = array ();
+
+			$Event = new \yii2fullcalendar\models\Event ();
+			
+			$Event->id = 0;
+			$Event->title = 'Testing';
+			$Event->start = date ( 'Y-m-d\TH:00:00\Z' );
+			$Event->end = date ( 'Y-m-d\TH:00:00\Z', strtotime('+1 hour') );
+			$Event->allDay = false;
+			$Event->editable = true;
+			$events [] = $Event;
+			foreach ($appointments as $appointment) {
 				$Event = new \yii2fullcalendar\models\Event ();
-				$Event->id = 1;
-				$Event->title = 'Testing';
-				$Event->start = date ( 'Y-m-d\TH:00:00\Z' );
-				$Event->end = date ( 'Y-m-d\TH:00:00\Z', strtotime('+1 hour') );
-				$Event->allDay = false;
-				$Event->editable = true;
+				$Event->id = $appointment->id;
+				$Event->title = $appointment->title;
+				$Event->start = gmdate ( 'Y-m-d\TH:i:00\Z', $appointment->start);
+				$Event->end = gmdate ( 'Y-m-d\TH:i:00\Z', $appointment->end );
 				$events [] = $Event;
-				/*
-				$Event = new \yii2fullcalendar\models\Event ();
-				$Event->id = 2;
-				$Event->title = 'Testing';
-				$Event->start = date ( 'Y-m-d\TH:i:s\Z', strtotime ( 'tomorrow 6am' ) );
-				$Event->editable = true;
-				$Event->durationEditable = true;
-				$events [] = $Event;
-				*/
-				echo \yii2fullcalendar\yii2fullcalendar::widget ( [ 
-						'options' => [ 
-								'lang' => 'ru' 
-						]
-						,
-						'header' => [ 
-								'left' => 'prev,next,today',
-								'center' => 'title',
-								'right' => 'agendaWeek' 
-						],
-						'clientOptions' => [ 
-								
-								'defaultView' => 'agendaWeek',
-								
-								'selectable' => false,
-								'selectHelper' => true,
-								// 'editable' => true,
-								'eventOverlap' => false,
-								'select' => AppointmentJS::onSelect(),
-								'dayClick' => AppointmentJS::onDayClick(),
-								'eventClick' => AppointmentJS::onEventClick(),
-						],
-						
-						'events' => $events 
-				] );
-				?>
+			}
+			echo \yii2fullcalendar\yii2fullcalendar::widget ( [ 
+					'id' => 'fCalendar',
+					'options' => [ 
+							'lang' => 'ru' 
+					]
+					,
+					'header' => [ 
+							'left' => 'prev,next,today',
+							'center' => 'title',
+							'right' => 'agendaWeek' 
+					],
+					'clientOptions' => [ 
+							
+							'defaultView' => 'agendaWeek',
+							
+							'selectable' => false,
+							'selectHelper' => true,
+							// 'editable' => true,
+							'eventOverlap' => false,
+							'select' => AppointmentJS::onSelect(),
+							'dayClick' => AppointmentJS::onDayClick(),
+							'eventClick' => AppointmentJS::onEventClick(),
+							'businessHours' => [
+							    'start' => '9:00',
+							    'end' => '19:00',
+							
+							    'dow' => [ 1, 2, 3, 4, 5, 6 ]							
+							]
+					],
+					
+					'events' => $events 
+			] );
+		?>
 	    </div>
 	    
 	    <?php 
@@ -74,6 +80,7 @@ $this->title = \Yii::t ( 'app', 'Doctors appointments' ) . ' ' . $doctor->name;
 	    
 	    echo Html::label(\Yii::t ( 'app', 'FIO' ));
 	    echo Html::input('input', 'fio', '', ['class' => 'form-control', 'id' => 'fio']);
+	    echo Html::input('hidden', 'doctor_id', $doctor->id, ['class' => 'form-control', 'id' => 'doctor_id']);
 	    ?>
 	    <div class="modal-footer">
 	    <?php 

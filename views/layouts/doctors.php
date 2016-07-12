@@ -25,13 +25,6 @@ $script = <<< JS
 		
 		
     });
-
-    $(document).on('pjax:success', function() {
-    // Your code goes here ...
-	console.log('PJAAAX');
-		console.log($('#fCalendar'));;
-		$('#fCalendar').fullCalendar( 'render' );
-	});
 JS;
 $this->registerJs($script, yii\web\View::POS_READY);
 ?>

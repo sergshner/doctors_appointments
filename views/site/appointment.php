@@ -69,7 +69,7 @@ $this->title = \Yii::t ( 'app', 'Doctors appointments' ) . ' ' . $doctor->name;
 					'events' => $events 
 			] );
 		?>
-	    </div>
+	    
 	    
 	    <?php 
 	    Modal::begin([
@@ -122,5 +122,6 @@ $this->title = \Yii::t ( 'app', 'Doctors appointments' ) . ' ' . $doctor->name;
 	    <?php
 	    Modal::end();
 	    ?>
+	    </div>
 	</div>
 </div>

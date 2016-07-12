@@ -83,12 +83,13 @@ $this->registerJs($script, yii\web\View::POS_READY);
         <div class="col-md-3" id="leftCol">
         	<?= $this->params['sidebar'] ?>
 	    </div><!--/left-->
-      <?php $pjax = Pjax::begin(['id' => 'test', 'linkSelector' => '#sidebar a, .pjax-link', 'scrollTo' => 1]); ?>
       	<!--right-->
-        <div class="col-md-9">        
-        	<?= $content ?>
+        <div class="col-md-9"> 
+      	<?php $pjax = Pjax::begin(['id' => 'test', 'linkSelector' => '#sidebar a, .pjax-link', 'scrollTo' => 1]); ?>       
+       		<?= $content ?>
+       	<?php Pjax::end(); ?>
         </div>
-        <?php Pjax::end(); ?>
+       
 	</div>
 </div>
 

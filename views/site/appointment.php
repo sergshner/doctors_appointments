@@ -3,6 +3,7 @@ use app\views\site\AppointmentJS;
 use yii\bootstrap\Modal;
 use yii\bootstrap\Button;
 use yii\bootstrap\Html;
+use kartik\spinner\Spinner;
 
 /* @var $this yii\web\View */
 
@@ -15,6 +16,14 @@ $this->title = \Yii::t ( 'app', 'Doctors appointments' ) . ' ' . $doctor->name;
 						'doctor' => $doctor 
 				] );
 		?>
+		<div id="fLoading">
+		<?php 
+		echo '<div class="well">';
+		echo Spinner::widget(['preset' => 'small', 'align' => 'left', 'color' => '#5CB85C', 'caption' => \Yii::t ( 'app', 'Loading doctor appointments')]);
+		echo '<div class="clearfix"></div>';
+		echo '</div>'
+		?>
+		</div>
 	    <div>
 	    <?php		
 			$events = array ();
@@ -58,6 +67,7 @@ $this->title = \Yii::t ( 'app', 'Doctors appointments' ) . ' ' . $doctor->name;
 							'select' => AppointmentJS::onSelect(),
 							'dayClick' => AppointmentJS::onDayClick(),
 							'eventClick' => AppointmentJS::onEventClick(),
+							'eventAfterAllRender' => AppointmentJS::onEventAfterAllRender(),
 							'businessHours' => [
 							    'start' => '9:00',
 							    'end' => '19:00',

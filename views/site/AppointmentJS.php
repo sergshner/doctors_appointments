@@ -83,6 +83,14 @@ class AppointmentJS {
 		");
 	}
 	
+	public static function onEventAfterAllRender() {
+		return new JsExpression("
+			function() {
+				$('#fLoading').hide();
+			}
+		"); 
+	}
+	
 	public static function onSelect() {
 		return new JsExpression("
 			function(start, end) {

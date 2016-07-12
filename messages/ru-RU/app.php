@@ -12,5 +12,6 @@ return [
 		'Enroll' => 'Записаться',
 		'Close' => 'Закрыть',
 		'Appointment on this datetime is not possible' => 'Запись на данное время невозможна',
-		'FIO' => 'ФИО'
+		'FIO' => 'ФИО',
+		'Loading doctor appointments' => 'Идёт загрузка расписания доктора...',
 ];

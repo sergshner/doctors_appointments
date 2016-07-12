@@ -1,6 +1,22 @@
 # doctors_appointments
 Это демо приложение для обеспечения записи клиента к врачу посредством веб-сайта. Приложение построено на базе фреймворка Yii2
 
+Ссылка на ДЕМО приложения: http://66.225.220.70:8081/
+
+# Установка
+
+## Требования
+1. git
+2. composer
+3. php
+
+### Установка
+1. Клонируем репозиторий: git clone https://github.com/sergshner/doctors_appointments.git .
+2. Ставим composer-asset-plugin: composer global require "fxp/composer-asset-plugin:^1.2.0"
+3. Ставим зависимости: composer install
+4. Редактируем config/db.php, заполняем dsn,username,password
+5. Применяем миграции: yii migrate/up
+
 # Реализация
 
 ## Модель данных и связи
